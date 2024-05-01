@@ -1,0 +1,17 @@
+{
+  "name": "@letientai299/react-decorated-text-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "dev": "pnpm -C web run dev"
+  },
+  "keywords": [],
+  "author": "letientai299",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
+}
