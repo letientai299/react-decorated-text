@@ -1,0 +1,13 @@
+.matcherList {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto auto;
+  gap: 4px;
+
+  & > * {
+    height: 100%;
+  }
+}
+
+.gridFullRow {
+  grid-column: 1/-1;
+}

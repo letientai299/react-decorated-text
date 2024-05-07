@@ -1,29 +1,62 @@
-import DecoratedText, { match } from '@letientai299/react-decorated-text';
+import DecoratedText, { Decor } from '@letientai299/react-decorated-text';
+import { useContext, useState } from 'react';
+import { MatcherList } from './MatcherList.tsx';
+import { TextContext } from './TextContext.ts';
+import data from './data.txt?raw';
 
-const text = `
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-`.trim();
+interface InputProps {
+  setText: (text: string) => void;
+}
 
 function App() {
-  const decors = [
-    ...match(text, /rea\w*/i, (p) => (
-      <span style={{ color: 'limegreen' }}>{p.children}</span>
-    )),
+  const [text, setText] = useState(data);
+  const [decors, setDecors] = useState<Decor[]>([]);
 
-    ...match(text, 'Eng', (p) => (
-      <span style={{ color: 'red' }}>{p.children}</span>
-    )),
-
-    ...match(text, 'some', (p) => (
-      <span style={{ background: 'cyan' }}>{p.children}</span>
-    )),
-
-    ...match(text, 'rea'),
-  ];
   return (
-    <main>
-      <DecoratedText text={text} decors={decors} />
-    </main>
+    <TextContext.Provider value={text}>
+      <main>
+        <article>
+          <header>
+            <h1>React Decorated Text demo</h1>
+          </header>
+          <Input setText={setText} />
+          <MatcherList setDecors={setDecors} />
+          <Output text={text} decors={decors} />
+        </article>
+      </main>
+    </TextContext.Provider>
+  );
+}
+
+function Input({ setText }: InputProps) {
+  const text = useContext(TextContext);
+  return (
+    <section>
+      <header>
+        <h2>Input</h2>
+      </header>
+      <textarea
+        style={{ width: '100%', minHeight: '6rem' }}
+        onChange={(e) => setText(e.target.value)}
+        value={text}
+      />
+    </section>
+  );
+}
+
+function Output(props: { text: string; decors: Decor[] }) {
+  return (
+    <section>
+      <header>
+        <h2>Output</h2>
+      </header>
+
+      <DecoratedText
+        text={props.text}
+        decors={props.decors}
+        style={{ whiteSpace: 'pre-line' }}
+      />
+    </section>
   );
 }
 

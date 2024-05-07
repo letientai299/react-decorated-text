@@ -2,12 +2,73 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/png;base64,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"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>React Decorated Text Documentation</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <a
+      href="https://github.com/letientai299/react-decorated-text"
+      class="github-corner"
+      aria-label="View source on GitHub"
+      ><svg
+        width="80"
+        height="80"
+        viewBox="0 0 250 250"
+        style="
+          fill: #151513;
+          color: #fff;
+          position: absolute;
+          top: 0;
+          border: 0;
+          right: 0;
+        "
+        aria-hidden="true"
+      >
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor"
+          style="transform-origin: 130px 106px"
+          class="octo-arm"
+        ></path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor"
+          class="octo-body"
+        ></path></svg></a
+    ><style>
+      .github-corner:hover .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+      }
+      @keyframes octocat-wave {
+        0%,
+        100% {
+          transform: rotate(0);
+        }
+        20%,
+        60% {
+          transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+          transform: rotate(10deg);
+        }
+      }
+      @media (max-width: 500px) {
+        .github-corner:hover .octo-arm {
+          animation: none;
+        }
+        .github-corner .octo-arm {
+          animation: octocat-wave 560ms ease-in-out;
+        }
+      }
+    </style>
   </body>
 </html>

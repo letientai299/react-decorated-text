@@ -17,6 +17,10 @@ export function match(
   part: string | RegExp,
   render?: RenderFn,
 ): Decor[] {
+  if (part === '' || part === null || part === undefined) {
+    return [];
+  }
+
   if (part instanceof RegExp) {
     return matchRegexp(s, part, render);
   }
