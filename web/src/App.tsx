@@ -11,6 +11,10 @@ interface InputProps {
 function App() {
   const [text, setText] = useState(data);
   const [decors, setDecors] = useState<Decor[]>([]);
+  const changeText = (txt: string) => {
+    setText(txt);
+    setDecors([]);
+  };
 
   return (
     <TextContext.Provider value={text}>
@@ -19,7 +23,7 @@ function App() {
           <header>
             <h1>React Decorated Text demo</h1>
           </header>
-          <Input setText={setText} />
+          <Input setText={changeText} />
           <MatcherList setDecors={setDecors} />
           <Output text={text} decors={decors} />
         </article>
@@ -36,7 +40,7 @@ function Input({ setText }: InputProps) {
         <h2>Input</h2>
       </header>
       <textarea
-        style={{ width: '100%', minHeight: '6rem' }}
+        style={{ minHeight: '16rem' }}
         onChange={(e) => setText(e.target.value)}
         value={text}
       />
