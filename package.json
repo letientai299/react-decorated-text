@@ -7,6 +7,7 @@
     "build": "pnpm -r run build",
     "test": "pnpm -r run test",
     "dev": "pnpm -C web run dev",
+    "fmt": "pnpm prettier --write .",
     "lint": "pnpm -r run lint",
     "release": "pnpm -C lib release"
   },

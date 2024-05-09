@@ -12,7 +12,7 @@ export interface DecoratedTextProps extends HTMLAttributes<HTMLElement> {
 
 export const DecoratedText = (props: DecoratedTextProps) => {
   const { text, decors, as: As = 'span', ...rest } = props;
-  const segments = useMemo(() => split(text, decors), [text, decors]);
+  const segments = useMemo(() => split(text.length, decors), [text, decors]);
 
   return (
     <As {...rest}>
@@ -27,7 +27,7 @@ export const DecoratedText = (props: DecoratedTextProps) => {
   );
 };
 
-export interface SegmentProps extends HTMLAttributes<HTMLElement> {
+interface SegmentProps extends HTMLAttributes<HTMLElement> {
   text: string;
   renders: RenderFn[];
 }

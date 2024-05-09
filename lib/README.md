@@ -85,7 +85,7 @@ more low level, but also more powerful:
 That said, this design leaves the many responsibilities to you, the users:
 
 - Make sure the searching is correct and fast
-- Handle accessiblity for text segments, especially in those overlapped
+- Handle accessibility for text segments, especially in those overlapped
   segments. This page might be helpful:
   [How to Accessibly Split Text ](https://css-irl.info/how-to-accessibly-split-text/)
 
