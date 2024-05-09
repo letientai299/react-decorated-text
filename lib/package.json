@@ -16,10 +16,11 @@
     "occurences",
     "substrings"
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "release": "pnpm publish --no-git-checks --access public",
     "test": "vitest run --coverage",
     "dev": "vite",
     "build": "tsc && vite build",

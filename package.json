@@ -7,7 +7,8 @@
     "build": "pnpm -r run build",
     "test": "pnpm -r run test",
     "dev": "pnpm -C web run dev",
-    "lint": "pnpm -r run lint"
+    "lint": "pnpm -r run lint",
+    "release": "pnpm -C lib release"
   },
   "keywords": [],
   "author": "letientai299",
