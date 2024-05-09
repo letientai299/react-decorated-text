@@ -55,8 +55,6 @@ function matchRegexp(s: string, re: RegExp, render?: RenderFn): Decor[] {
   return res;
 }
 
-// TODO (tai): what if there's overlapping range with same kind?
-
 export function split(text: string, decors: Decor[] | undefined): Seg[] {
   if (decors === undefined || decors.length === 0) {
     return [{ range: [0, text.length], renders: [] }];
