@@ -1,6 +1,23 @@
 {
   "name": "@letientai299/react-decorated-text",
+  "author": "@letientai",
+  "description": "React component to apply multiple text highlight/decorations within a larger body of text",
+  "keywords": [
+    "react",
+    "reactjs",
+    "component",
+    "highlights",
+    "decorate",
+    "decorations",
+    "annotate",
+    "annotations",
+    "words",
+    "matches",
+    "occurences",
+    "substrings"
+  ],
   "version": "0.0.1",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "test": "vitest run --coverage",

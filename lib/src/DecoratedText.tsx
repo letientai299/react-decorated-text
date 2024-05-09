@@ -2,8 +2,11 @@ import { Decor, RenderFn, split } from './core.ts';
 import { HTMLAttributes, useMemo } from 'react';
 
 export interface DecoratedTextProps extends HTMLAttributes<HTMLElement> {
+  /** Body of text to the display. */
   text: string;
+  /** List of {@link Decor} to render within. */
   decors?: Decor[];
+  /** Use other HTML tag to render the {@link text} wrapper. */
   as?: keyof HTMLElementTagNameMap;
 }
 

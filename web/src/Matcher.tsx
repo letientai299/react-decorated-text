@@ -1,4 +1,11 @@
-import { ChangeEvent, useContext, useId, useState } from 'react';
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useId,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import { TextContext } from './TextContext.ts';
 import { FiCode, FiDelete } from 'react-icons/fi';
 
@@ -51,25 +58,28 @@ export function Matcher(props: MatcherProps) {
     setOption(opt);
   };
 
-  const createDecors = (q: string) => {
-    if (!m) {
-      return setDecors([]);
-    }
+  const createDecors = useCallback(
+    (q: string) => {
+      if (!m) {
+        return setDecors([]);
+      }
 
-    let ds;
-    if (!q.startsWith('/')) {
-      ds = m.fn(text, q);
-    } else {
-      const cutAt = q.lastIndexOf('/');
-      const re = q.slice(1, cutAt);
-      const flags = q.slice(cutAt + 1);
-      ds = m.fn(text, new RegExp(re, flags));
-    }
+      let ds;
+      if (!q.startsWith('/')) {
+        ds = m.fn(text, q);
+      } else {
+        const regexp = buildRegexp(q);
+        ds = m.fn(text, regexp ?? '');
+      }
 
-    setDecors(ds);
-  };
+      setDecors(ds);
+    },
+    [m, setDecors, text],
+  );
 
-  createDecors(query);
+  useLayoutEffect(() => {
+    createDecors(query);
+  }, [createDecors, query]);
 
   return (
     <>
@@ -87,6 +97,17 @@ export function Matcher(props: MatcherProps) {
       {showCode && <CodeBlock code={m.code} />}
     </>
   );
+}
+
+function buildRegexp(q: string): RegExp | undefined {
+  const cutAt = q.lastIndexOf('/');
+  const re = q.slice(1, cutAt);
+  const flags = q.slice(cutAt + 1);
+  try {
+    return new RegExp(re, flags);
+  } catch (ignored) {
+    return undefined;
+  }
 }
 
 function Tool(props: { icon: IconType; tip: string; onClick: () => void }) {
