@@ -6,8 +6,8 @@ export type RenderFn = (props: PropsWithChildren) => ReactElement;
 
 export type Decor = {
   /**
-   * Range to apply decoration, including the start and end position.
-   * Invalid part of the range will be ignored.
+   * Range to apply decoration as [start, end), where start is inclusive
+   * and end is exclusive. Invalid or out-of-bounds ranges are ignored.
    */
   range: Range;
 
