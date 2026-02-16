@@ -97,7 +97,7 @@ export function split(length: number, decors: Decor[] | undefined): Seg[] {
     const last =
       binarySearch(segments, (p: Seg) => {
         const [x] = p.range;
-        return b < x;
+        return b <= x;
       }) - 1;
 
     segments = [

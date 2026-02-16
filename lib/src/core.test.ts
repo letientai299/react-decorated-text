@@ -1,4 +1,4 @@
-import { Decor, defaultRenderFn, match, overlap, Seg } from './core.ts';
+import { Decor, defaultRenderFn, match, overlap, Seg, split } from './core.ts';
 import { describe, expect, test } from 'vitest';
 
 describe.each([
@@ -74,5 +74,31 @@ describe('match', () => {
     const text = 'start\nstart again';
     const decors = match(text, /^start/m);
     expect(decors).toHaveLength(2);
+  });
+});
+
+describe('split', () => {
+  test('does not create zero-width segments for touching ranges', () => {
+    // Decor [0,5] touching segment boundary at 5 in text of length 10
+    const segs = split(10, [{ range: [0, 5] }]);
+    const zeroWidth = segs.filter(
+      (s) => s.range[0] === s.range[1],
+    );
+    expect(zeroWidth).toHaveLength(0);
+    // Should produce exactly 2 segments: [0,5] decorated and [5,10] plain
+    expect(segs).toHaveLength(2);
+    expect(segs[0].range).toEqual([0, 5]);
+    expect(segs[0].renders).toHaveLength(1);
+    expect(segs[1].range).toEqual([5, 10]);
+    expect(segs[1].renders).toHaveLength(0);
+  });
+
+  test('adjacent decors do not produce zero-width segments', () => {
+    const segs = split(10, [{ range: [0, 5] }, { range: [5, 10] }]);
+    const zeroWidth = segs.filter(
+      (s) => s.range[0] === s.range[1],
+    );
+    expect(zeroWidth).toHaveLength(0);
+    expect(segs).toHaveLength(2);
   });
 });
