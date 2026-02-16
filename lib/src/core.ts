@@ -63,7 +63,7 @@ function matchString(text: string, query: string, render?: RenderFn): Decor[] {
 
 function matchRegexp(text: string, re: RegExp, render?: RenderFn): Decor[] {
   if (!re.global) {
-    re = new RegExp(re, 'g');
+    re = new RegExp(re.source, re.flags + 'g');
   }
 
   const res: Decor[] = [];
