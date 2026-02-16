@@ -9,6 +9,11 @@ larger body of text.
 
 ![Demo](./docs/demo.png 'Captured demo')
 
+## Compatibility
+
+Requires **React 16.8+** (the first version with hooks). Compatible with React
+16.8, 17, 18, and 19.
+
 ## Installation
 
 ```sh
