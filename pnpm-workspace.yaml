@@ -1,3 +1,7 @@
 packages:
   - lib
   - web
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - esbuild
