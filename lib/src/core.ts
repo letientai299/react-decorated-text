@@ -83,7 +83,7 @@ export function split(length: number, decors: Decor[] | undefined): Seg[] {
 
   for (const decor of decors) {
     const [a, b] = decor.range;
-    if (a >= b) {
+    if (a >= b || a < 0) {
       continue; // skip invalid range
     }
 
@@ -99,6 +99,10 @@ export function split(length: number, decors: Decor[] | undefined): Seg[] {
         const [x] = p.range;
         return b <= x;
       }) - 1;
+
+    if (first > last || first >= segments.length) {
+      continue; // decor doesn't overlap any segment
+    }
 
     segments = [
       // all the segments at the beginning

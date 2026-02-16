@@ -101,4 +101,31 @@ describe('split', () => {
     expect(zeroWidth).toHaveLength(0);
     expect(segs).toHaveLength(2);
   });
+
+  test('decor range past text length does not crash', () => {
+    const segs = split(10, [{ range: [100, 200] }]);
+    expect(segs).toHaveLength(1);
+    expect(segs[0].range).toEqual([0, 10]);
+  });
+
+  test('decor range starting at text length does not crash', () => {
+    const segs = split(10, [{ range: [10, 15] }]);
+    expect(segs).toHaveLength(1);
+    expect(segs[0].range).toEqual([0, 10]);
+  });
+
+  test('decor with negative start is skipped', () => {
+    const segs = split(10, [{ range: [-5, 3] }]);
+    expect(segs).toHaveLength(1);
+    expect(segs[0].range).toEqual([0, 10]);
+  });
+
+  test('partially out-of-bounds decor is applied to valid portion', () => {
+    const segs = split(10, [{ range: [8, 15] }]);
+    expect(segs).toHaveLength(2);
+    expect(segs[0].range).toEqual([0, 8]);
+    expect(segs[0].renders).toHaveLength(0);
+    expect(segs[1].range).toEqual([8, 10]);
+    expect(segs[1].renders).toHaveLength(1);
+  });
 });
