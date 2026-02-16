@@ -81,9 +81,7 @@ describe('split', () => {
   test('does not create zero-width segments for touching ranges', () => {
     // Decor [0,5] touching segment boundary at 5 in text of length 10
     const segs = split(10, [{ range: [0, 5] }]);
-    const zeroWidth = segs.filter(
-      (s) => s.range[0] === s.range[1],
-    );
+    const zeroWidth = segs.filter((s) => s.range[0] === s.range[1]);
     expect(zeroWidth).toHaveLength(0);
     // Should produce exactly 2 segments: [0,5] decorated and [5,10] plain
     expect(segs).toHaveLength(2);
@@ -95,9 +93,7 @@ describe('split', () => {
 
   test('adjacent decors do not produce zero-width segments', () => {
     const segs = split(10, [{ range: [0, 5] }, { range: [5, 10] }]);
-    const zeroWidth = segs.filter(
-      (s) => s.range[0] === s.range[1],
-    );
+    const zeroWidth = segs.filter((s) => s.range[0] === s.range[1]);
     expect(zeroWidth).toHaveLength(0);
     expect(segs).toHaveLength(2);
   });

@@ -105,7 +105,7 @@ function buildRegexp(q: string): RegExp | undefined {
   const flags = q.slice(cutAt + 1);
   try {
     return new RegExp(re, flags);
-  } catch (ignored) {
+  } catch (_ignored) {
     return undefined;
   }
 }

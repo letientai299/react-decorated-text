@@ -26,7 +26,7 @@ export function typo(text: string, query: string | RegExp) {
         });
       }
     }
-  } catch (ignored) {
+  } catch (_ignored) {
     /* empty */
   }
   return res;

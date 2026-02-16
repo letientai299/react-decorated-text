@@ -1,9 +1,15 @@
 import { Decor } from '@letientai299/react-decorated-text';
-import { Fragment, ReactElement, useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import styles from './Matchers.module.css';
 
 import 'react-tooltip/dist/react-tooltip.css';
 import { Matcher } from './Matcher.tsx';
+
+interface MatcherData {
+  id: string;
+  query?: string;
+  option?: string;
+}
 
 interface MatcherListProps {
   setDecors: (ds: Decor[]) => void;
@@ -11,26 +17,9 @@ interface MatcherListProps {
 
 export function MatcherList({ setDecors }: MatcherListProps) {
   const decorMap = useRef(new Map<string, Decor[]>());
-  const [matchers, setMatchers] = useState<[string, ReactElement][]>([
-    [
-      'm0',
-      <Matcher
-        query={`/p\\w+g/gi`}
-        option={'mark'}
-        onRemove={() => delMatcher('m0')}
-        setDecors={(ds) => updateDecors('m0', ds)}
-      />,
-    ],
-
-    [
-      'm1',
-      <Matcher
-        query={`pub`}
-        option={'error'}
-        onRemove={() => delMatcher('m1')}
-        setDecors={(ds) => updateDecors('m1', ds)}
-      />,
-    ],
+  const [matchers, setMatchers] = useState<MatcherData[]>([
+    { id: 'm0', query: `/p\\w+g/gi`, option: 'mark' },
+    { id: 'm1', query: 'pub', option: 'error' },
   ]);
 
   const updateDecors = (id: string, ds: Decor[]) => {
@@ -45,23 +34,12 @@ export function MatcherList({ setDecors }: MatcherListProps) {
 
   const delMatcher = (delID: string) => {
     updateDecors(delID, []);
-    setMatchers((ms) => ms.filter(([id]) => id != delID));
+    setMatchers((ms) => ms.filter(({ id }) => id != delID));
   };
 
   const addMatcher = () => {
-    setMatchers((ms) => {
-      const id = Math.random().toString();
-      return [
-        ...ms,
-        [
-          id,
-          <Matcher
-            onRemove={() => delMatcher(id)}
-            setDecors={(ds) => updateDecors(id, ds)}
-          />,
-        ],
-      ];
-    });
+    const id = Math.random().toString();
+    setMatchers((ms) => [...ms, { id }]);
   };
 
   return (
@@ -72,8 +50,15 @@ export function MatcherList({ setDecors }: MatcherListProps) {
       <Guide />
 
       <div className={styles.matcherList}>
-        {matchers.map(([id, m]) => (
-          <Fragment key={id}>{m}</Fragment>
+        {matchers.map(({ id, query, option }) => (
+          <Fragment key={id}>
+            <Matcher
+              query={query}
+              option={option}
+              onRemove={() => delMatcher(id)}
+              setDecors={(ds) => updateDecors(id, ds)}
+            />
+          </Fragment>
         ))}
         <button className={styles.gridFullRow} onClick={addMatcher}>
           Add matcher
